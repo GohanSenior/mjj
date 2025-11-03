@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.color {
+    background-color: #344D59;
+}
+
+a {
+    background-color: #B8CBD0;
+    color: #344D59;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+a:hover {
+    color: #344D59;
+}
+
+i {
+    color: white;
+}
+
+.loupe {
+    background-color: #B8CBD0;
+    padding: 15px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    width: 50px!important;
+}
+
+.my-carou {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.titre {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    top: 20px;
+    left: 50%;
+    color: white;
+}
