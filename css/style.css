@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+.color {
+    background-color: #344D59;
+}
+
+#logoMJJ {
+    background-color: #B8CBD0;
+    color: #344D59;
+    padding: .3125rem 1.25rem;
+    border-radius: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#logoMJJ:hover {
+    color: #344D59;
+}
+
+#logoLoupe {
+    color: white;
+}
+
+.loupe {
+    background-color: #B8CBD0;
+    padding: 15px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    width: 50px !important;
+}
+
+.my-carou {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.titre {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    top: 20px;
+    left: 50%;
+    color: white;
+}
+
+.titre2 {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 2px 7px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+
+h2 {
+    color: white;
+}
+
+.carou2 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 10px;
+    margin: 0;
+    height: 37vh;
+    background-color: #B8CBD0;
+    justify-content: space-between;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: hidden !important;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+}
+
+
+.my-card {
+    /* width: 900px !important; */
+    min-width: 250px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+/* #scroll {
+    overflow-x: scroll;
+} */
+
+/* .scrollbarre {
+    border: 1px solid black;
+    width: 250px;
+    margin-bottom: 12px;
+} */
+
+.note {
+    color: gold;
+}
