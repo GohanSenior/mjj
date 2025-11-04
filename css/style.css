@@ -81,22 +81,10 @@ h2 {
 
 
 .my-card {
-    /* width: 900px !important; */
     min-width: 250px;
     background-color: white;
     border-radius: 10px;
 }
-
-
-/* #scroll {
-    overflow-x: scroll;
-} */
-
-/* .scrollbarre {
-    border: 1px solid black;
-    width: 250px;
-    margin-bottom: 12px;
-} */
 
 .note {
     color: gold;
