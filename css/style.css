@@ -13,19 +13,19 @@ body {
     background-color: #344D59;
 }
 
-a {
+#logoMJJ {
     background-color: #B8CBD0;
     color: #344D59;
-    padding: 20px;
+    padding: .3125rem 1.25rem;
     border-radius: 10px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-a:hover {
+#logoMJJ:hover {
     color: #344D59;
 }
 
-i {
+#logoLoupe {
     color: white;
 }
 
