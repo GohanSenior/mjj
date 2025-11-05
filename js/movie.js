@@ -1,5 +1,13 @@
-const URLCREDITS = "./data/credits.json";
-const URLDETAILS = "./data/details.json";
+const URLCREDITS = "./data/credits.json"; //  "https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US";
+const URLDETAILS = "./data/details.json"; // "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
+const options = {
+    method: "GET",
+    headers: {
+        accept: "application/json",
+        Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3N2MzOTRjYzE3ZDc0OTBlOWMyZjg2YTVlZjBjMTcwMyIsIm5iZiI6MTc2MjMzNzgyNS44NzksInN1YiI6IjY5MGIyNDIxZmZhNTZkZTQyN2Q3MzFlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DJgdtarzoOrMN1hXM7VA5GSYDrGFyZLxFsyQ3J3rD2w",
+    },
+};
 
 let movieContainer = document.getElementById("movie-container");
 let posterImg = document.getElementById("poster-img");
@@ -18,8 +26,8 @@ fetch(URLDETAILS)
     .then((data) => {
         // console.log(data.vote_average);
         let dateFormatee = transformerDate(data.release_date);
-        movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${data.backdrop_path})`;
-        posterImg.setAttribute("src", `https://image.tmdb.org/t/p/w300${data.poster_path}`);
+        movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`;
+        posterImg.setAttribute("src", `https://image.tmdb.org/t/p/w500${data.poster_path}`);
         titleH1.innerText = `${data.title} (${data.release_date.slice(0, 4)})`;
         releaseGenresPara.innerText = `${dateFormatee} . ${data.genres[0].name}, ${data.genres[1].name}`;
         notePara.innerText = `⭐ ${data.vote_average} / 10`;
