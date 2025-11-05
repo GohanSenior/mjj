@@ -23,13 +23,13 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1', op
             
             films.forEach((film, index) => {
                 carouDiv.innerHTML += `<div class="carousel-item ${index === 0 ? 'active' : ''}">
-                    <img src="https://image.tmdb.org/t/p/w500${film.poster_path}" class="d-block m-auto" alt="...">
+                    <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.poster_path}" class="d-block m-auto" alt="...">
                 </div>`;
             });
 
             cardFilm.forEach((film) => {
                 filmCard.innerHTML += `<div class="my-card">
-                    <img src="https://image.tmdb.org/t/p/w500${film.backdrop_path}" class="card-img-top" alt="...">
+                    <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.backdrop_path}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${film.title}</h5>
                          <p class="card-text">⭐${film.vote_average}/10</p>
