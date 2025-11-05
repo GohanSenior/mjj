@@ -1,5 +1,7 @@
 const URLCREDITS = "./data/credits.json"; //  "https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US";
 const URLDETAILS = "./data/details.json"; // "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
+const urlParams = new URLSearchParams(window.location.search);
+const movieId = urlParams.get("id");
 const options = {
     method: "GET",
     headers: {
@@ -21,7 +23,7 @@ let rolesDiv = document.getElementById("roles");
 let actorCardsDiv = document.getElementById("actor-cards");
 
 // Charger et afficher le contenu de details.json
-fetch(URLDETAILS)
+fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
     .then((response) => response.json())
     .then((data) => {
         // console.log(data.vote_average);
@@ -36,7 +38,7 @@ fetch(URLDETAILS)
     })
     .catch((error) => console.error("Erreur:", error));
 
-fetch(URLCREDITS)
+fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=fr-FR`, options)
     .then((response) => response.json())
     .then((data) => {
         let tDirectors = [];
@@ -62,8 +64,11 @@ fetch(URLCREDITS)
         let actors = data.cast.slice(0, 10);
         actors.forEach((element) => {
             if (element.known_for_department === "Acting") {
+                // Utiliser une image par défaut si profile_path est null
+                let imagePath = element.profile_path ? `https://image.tmdb.org/t/p/w200${element.profile_path}` : "./images/no-avatar.png";
+
                 actorCardsDiv.innerHTML += `<div class="actor-card">
-                                                <img src="https://image.tmdb.org/t/p/w200${element.profile_path}}" class="card-img-top actor-img" alt="...">
+                                                <img src="${imagePath}" class="card-img-top actor-img" alt="acteur">
                                                 <div class="card-body">
                                                 <h5 id= "actor-h5"class="card-title">${element.name}</h5>
                                                 <p id="role-p" class="card-text">${element.character}</p>
