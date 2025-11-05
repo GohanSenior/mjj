@@ -71,7 +71,7 @@ body {
     gap: 20px;
     padding: 10px;
     margin: 0;
-    height: 37vh;
+    /* height: 37vh; */
     background-color: #b8cbd0;
     justify-content: space-between;
     -webkit-overflow-scrolling: touch;
@@ -86,7 +86,7 @@ body {
     border-radius: 10px;
 }
 
-.my-card > a {
+.my-card>a {
     color: black;
     text-decoration: none;
 }
@@ -101,13 +101,12 @@ body {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #poster-img {
     flex-shrink: 0;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
 
@@ -116,6 +115,7 @@ body {
     padding: 20px;
     background-color: rgba(109, 109, 109, 0.5);
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #realese-genres,
@@ -141,6 +141,8 @@ h2 {
 
 .actor-card {
     width: 150px;
+    min-width: 150px;
+    height: 330px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -156,5 +158,13 @@ h2 {
 
 #actor-h5,
 #role-p {
-    padding: 0px 5px 0px 5px;
+    padding: 5px 5px 0px 5px;
+}
+
+
+@media (max-width: 600px) {
+    #poster-img {
+        width: 100%;
+    }
+
 }

@@ -1,7 +1,7 @@
-const URLCREDITS = "./data/credits.json"; //  "https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US";
-const URLDETAILS = "./data/details.json"; // "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
+// Récupération de l'ID du film depuis les paramètres de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
+// Configuration des options pour la requête fetch
 const options = {
     method: "GET",
     headers: {
@@ -11,6 +11,7 @@ const options = {
     },
 };
 
+// Sélection des éléments du DOM
 let movieContainer = document.getElementById("movie-container");
 let posterImg = document.getElementById("poster-img");
 let titleH1 = document.getElementById("title");
@@ -23,50 +24,49 @@ let rolesDiv = document.getElementById("roles");
 let actorCardsDiv = document.getElementById("actor-cards");
 
 // Charger et afficher le contenu de details.json
-fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
+fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=fr-FR`, options)
     .then((response) => response.json())
     .then((data) => {
-        // console.log(data.vote_average);
         let dateFormatee = transformerDate(data.release_date);
         movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`;
         posterImg.setAttribute("src", `https://image.tmdb.org/t/p/w500${data.poster_path}`);
         titleH1.innerText = `${data.title} (${data.release_date.slice(0, 4)})`;
-        releaseGenresPara.innerText = `${dateFormatee} . ${data.genres[0].name}, ${data.genres[1].name}`;
-        notePara.innerText = `⭐ ${data.vote_average} / 10`;
+        let genresString = data.genres.map((genre) => genre.name).join(", "); // Créer une chaîne avec tous les genres disponibles
+        releaseGenresPara.innerText = `${dateFormatee}. ${genresString}`;
+        notePara.innerText = `⭐ ${data.vote_average.toFixed(1)} / 10`;
         taglinePara.innerText = data.tagline;
         descriptionPara.innerText = data.overview;
     })
     .catch((error) => console.error("Erreur:", error));
 
+// Charger et afficher le contenu des crédits
 fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=fr-FR`, options)
     .then((response) => response.json())
     .then((data) => {
+        // Récupérer et afficher les réalisateurs et leurs rôles
         let tDirectors = [];
-        // console.log(data.crew[107]);
         data.crew.forEach((element) => {
             if (element.job === "Director") {
                 tDirectors.push(element.name);
-                // directorsDiv.innerHTML += `<h4>${element.name}</h4>`;
             }
         });
-
         tDirectors.forEach((director) => {
             let memberDiv = document.createElement("div");
             directorsDiv.appendChild(memberDiv);
             memberDiv.innerHTML += `<h4>${director}</h4>`;
             data.crew.forEach((element) => {
                 if (element.name === director) {
-                    memberDiv.innerHTML += `<p>${element.job}</p>`;
+                    memberDiv.innerHTML += `<p class="text-center">${element.job}</p>`;
                 }
             });
         });
 
+        // Afficher les acteurs principaux (limité à 10)
         let actors = data.cast.slice(0, 10);
         actors.forEach((element) => {
             if (element.known_for_department === "Acting") {
                 // Utiliser une image par défaut si profile_path est null
                 let imagePath = element.profile_path ? `https://image.tmdb.org/t/p/w200${element.profile_path}` : "./images/no-avatar.png";
-
                 actorCardsDiv.innerHTML += `<div class="actor-card">
                                                 <img src="${imagePath}" class="card-img-top actor-img" alt="acteur">
                                                 <div class="card-body">
