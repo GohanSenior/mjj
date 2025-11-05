@@ -1,11 +1,17 @@
 "use strict";
 
-const URLDATA = "./data/data.json";
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NWE0YjQwNzJkOWFlOWNjOWNhNzQ2ZDk5YTg1OWY0ZiIsIm5iZiI6MTc2MjMzNzg2Mi40OTIsInN1YiI6IjY5MGIyNDQ2M2Q5MTY5ZTRjMmY2Y2VkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IdTPk-ScEmyEjOU715JAGDAzs9mLP-ZgoVijOH61IGk'
+  }
+};
 
 let carouDiv = document.getElementById("createcarou");
 let filmCard = document.getElementById("filmCard");
 
-fetch(URLDATA)
+fetch('https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1', options)
     .then(response => response.json())  // Récupérer les données JSON
     .then(data => {
 
