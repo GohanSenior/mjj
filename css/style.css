@@ -92,3 +92,8 @@ h2 {
     background-color: white;
     border-radius: 10px;
 }
+
+.my-card > a {
+    color: black;
+    text-decoration: none;
+}
