@@ -38,9 +38,16 @@ body {
 }
 
 .my-carou {
-    height: 50vh;
+    height: 70vh;
     display: flex;
     align-items: center;
+}
+
+.carousel-item img {
+    height: 65vh;
+    width: auto !important;
+    margin: auto;
+    object-fit: contain;
 }
 
 .titre {
@@ -48,7 +55,6 @@ body {
     z-index: 2;
     text-align: center;
     top: 20px;
-    left: 50%;
     color: white;
 }
 
@@ -58,10 +64,6 @@ body {
     z-index: 3;
     border-radius: 10px;
 }
-
-/* h2 {
-    color: white;
-} */
 
 .carou2 {
     display: flex;
@@ -79,7 +81,6 @@ body {
 }
 
 .my-card {
-    /* width: 900px !important; */
     min-width: 250px;
     background-color: white;
     border-radius: 10px;
