@@ -86,8 +86,9 @@ body {
     border-radius: 10px;
 }
 
-.note {
-    color: gold;
+.my-card > a {
+    color: black;
+    text-decoration: none;
 }
 
 #movie-container {
