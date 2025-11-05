@@ -10,19 +10,19 @@ body {
 }
 
 .color {
-    background-color: #344D59;
+    background-color: #344d59;
 }
 
 #logoMJJ {
-    background-color: #B8CBD0;
-    color: #344D59;
-    padding: .3125rem 1.25rem;
+    background-color: #b8cbd0;
+    color: #344d59;
+    padding: 0.3125rem 1.25rem;
     border-radius: 10px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 #logoMJJ:hover {
-    color: #344D59;
+    color: #344d59;
 }
 
 #logoLoupe {
@@ -30,7 +30,7 @@ body {
 }
 
 .loupe {
-    background-color: #B8CBD0;
+    background-color: #b8cbd0;
     padding: 15px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -59,9 +59,9 @@ body {
     border-radius: 10px;
 }
 
-h2 {
+/* h2 {
     color: white;
-}
+} */
 
 .carou2 {
     display: flex;
@@ -70,7 +70,7 @@ h2 {
     padding: 10px;
     margin: 0;
     height: 37vh;
-    background-color: #B8CBD0;
+    background-color: #b8cbd0;
     justify-content: space-between;
     -webkit-overflow-scrolling: touch;
     overflow-y: hidden !important;
@@ -138,8 +138,12 @@ h2 {
 }
 
 .actor-card {
+    min-width: 150px;
     background-color: white;
     border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .actor-img {
