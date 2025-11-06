@@ -29,7 +29,8 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=fr-FR`, options)
     .then((data) => {
         let dateFormatee = transformerDate(data.release_date);
         movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`;
-        posterImg.setAttribute("src", `https://image.tmdb.org/t/p/w500${data.poster_path}`);
+        const posterPath = data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "./images/no-poster.png";
+        posterImg.setAttribute("src", posterPath);
         titleH1.innerText = `${data.title} (${data.release_date.slice(0, 4)})`;
         let genresString = data.genres.map((genre) => genre.name).join(", "); // Créer une chaîne avec tous les genres disponibles
         releaseGenresPara.innerText = `${dateFormatee}. ${genresString}`;
@@ -66,7 +67,7 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=fr-FR`, op
         actors.forEach((element) => {
             if (element.known_for_department === "Acting") {
                 // Utiliser une image par défaut si profile_path est null
-                let imagePath = element.profile_path ? `https://image.tmdb.org/t/p/w200${element.profile_path}` : "./images/no-avatar.png";
+                const imagePath = element.profile_path ? `https://image.tmdb.org/t/p/w200${element.profile_path}` : "./images/no-avatar.png";
                 actorCardsDiv.innerHTML += `<div class="actor-card">
                                                 <img src="${imagePath}" class="card-img-top actor-img" alt="acteur">
                                                 <div class="card-body">

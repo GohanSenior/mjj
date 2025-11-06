@@ -29,12 +29,109 @@ body {
     color: white;
 }
 
+.search-container {
+    max-width: 400px;
+    width: 100%;
+}
+
+.search-wrapper {
+    gap: 2px;
+}
+
+.search-input {
+    background-color: #b8cbd0;
+    border: none;
+    padding: 8px 16px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    color: #344d59;
+}
+
+.search-input::placeholder {
+    color: #344d59;
+    opacity: 0.7;
+}
+
+.search-icon {
+    background-color: #b8cbd0;
+    border: none;
+    padding: 8px 16px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    color: #344d59;
+}
+
+.suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.suggestions-dropdown::-webkit-scrollbar {
+    display: none;
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-poster {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.suggestion-info {
+    flex: 1;
+}
+
+.suggestion-title {
+    font-weight: bold;
+    color: #344d59;
+    margin-bottom: 4px;
+}
+
+.suggestion-year {
+    color: #666;
+    font-size: 12px;
+}
+
 .loupe {
     background-color: #b8cbd0;
     padding: 15px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
-    width: 50px !important;
+    /* width: 50px !important; */
+
 }
 
 .my-carou {
@@ -44,7 +141,7 @@ body {
 }
 
 .carousel {
-    background: linear-gradient(200deg,rgba(122, 144, 164, 1) 0%, rgba(19, 124, 139, 1) 46%, rgba(112, 156, 167, 1) 100%);
+    background: linear-gradient(200deg, rgba(122, 144, 164, 1) 0%, rgba(19, 124, 139, 1) 46%, rgba(112, 156, 167, 1) 100%);
 }
 
 .carousel-item img {
@@ -76,7 +173,7 @@ body {
     padding: 10px;
     margin: 0;
     background-color: #b8cbd0;
-    justify-content: space-between;
+    justify-content: space-evenly;
     overflow-y: hidden !important;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
@@ -164,7 +261,22 @@ h2 {
 }
 
 
-@media (max-width: 600px) {
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 250px;
+    }
+
+    .search-input {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .search-button {
+        padding: 6px 12px;
+    }
+
     #poster-img {
         width: 100%;
     }
