@@ -31,13 +31,14 @@ fetch("https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1", op
         });
         // Créer les cartes de films dans l'overflow dynamiquement
         cardFilm.forEach((film) => {
+            let dateFormatee = transformerDate(film.release_date);
             filmCard.innerHTML += `
                 <div class="my-card">
                     <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.backdrop_path}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${film.title}</h5>
                         <p class="card-text">⭐${film.vote_average.toFixed(1)} / 10</p>
-                        <p class="card-text">${film.release_date}</p>
+                        <p class="card-text">${dateFormatee}</p>
                     </div>
                 </div>
             `;
@@ -126,4 +127,9 @@ searchInput.addEventListener("keypress", (e) => {
 // Fonction pour masquer les suggestions
 function hideSuggestions() {
     suggestionsDiv.style.display = "none";
+}
+
+function transformerDate(dateString) {
+    let [annee, mois, jour] = dateString.split("-");
+    return `${jour}-${mois}-${annee}`;
 }
