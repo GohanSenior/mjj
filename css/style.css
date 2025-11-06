@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: black;
+    background: linear-gradient(130deg, rgba(122, 144, 164, 1) 0%, rgba(19, 124, 139, 1) 46%, rgba(184, 203, 208, 1) 100%);
 }
 
 .color {
@@ -43,6 +43,10 @@ body {
     align-items: center;
 }
 
+.carousel {
+    background: linear-gradient(200deg,rgba(122, 144, 164, 1) 0%, rgba(19, 124, 139, 1) 46%, rgba(112, 156, 167, 1) 100%);
+}
+
 .carousel-item img {
     height: 65vh;
     width: auto !important;
@@ -71,10 +75,8 @@ body {
     gap: 20px;
     padding: 10px;
     margin: 0;
-    /* height: 37vh; */
     background-color: #b8cbd0;
     justify-content: space-between;
-    -webkit-overflow-scrolling: touch;
     overflow-y: hidden !important;
     scroll-behavior: smooth;
     -ms-overflow-style: none;

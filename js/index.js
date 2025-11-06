@@ -17,21 +17,22 @@ fetch("https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1", op
     .then((data) => {
         // Limiter à 3 films
         const films = data.results.slice(0, 3);
+        // Commence l'overflow à partir de 4
         const cardFilm = data.results.slice(4);
 
-        // Créer les items du carrousel et les indicateurs dynamiquement
+        // Créer les items du carrousel dynamiquement
         films.forEach((film, index) => {
             carouDiv.innerHTML += `<div class="carousel-item ${index === 0 ? "active" : ""}">
                     <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.poster_path}" class="d-block m-auto" alt="...">
                 </div>`;
         });
-        // Créer les cartes de films dynamiquement
+        // Créer les cartes de films dans l'overflow dynamiquement
         cardFilm.forEach((film) => {
             filmCard.innerHTML += `<div class="my-card">
                                         <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.backdrop_path}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">${film.title}</h5>
-                                            <p class="card-text">⭐ ${film.vote_average.toFixed(1)} / 10</p>
+                                            <p class="card-text">⭐${film.vote_average.toFixed(1)} / 10</p>
                                             <p class="card-text">${film.release_date}</p>
                                         </div>
                                     </div>`;
