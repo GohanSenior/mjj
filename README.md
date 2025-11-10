@@ -3,6 +3,7 @@
 **Un site web moderne pour découvrir et explorer des films** 🍿
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![HTML](https://img.shields.io/badge/HTML-5-orange.svg)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)
 ![CSS](https://img.shields.io/badge/CSS-3-blue.svg)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)
