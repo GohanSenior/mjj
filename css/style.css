@@ -9,6 +9,13 @@ body {
     background: linear-gradient(130deg, rgba(122, 144, 164, 1) 0%, rgba(19, 124, 139, 1) 46%, rgba(184, 203, 208, 1) 100%);
 }
 
+h2 {
+    color: white;
+    margin: 10px;
+}
+
+/* ----------NAVBAR---------- */
+
 .color {
     background-color: #344d59;
 }
@@ -25,9 +32,7 @@ body {
     color: #344d59;
 }
 
-#logoLoupe {
-    color: white;
-}
+/* ----------SEARCH BAR---------- */
 
 .search-container {
     max-width: 400px;
@@ -125,14 +130,7 @@ body {
     font-size: 12px;
 }
 
-.loupe {
-    background-color: #b8cbd0;
-    padding: 15px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    /* width: 50px !important; */
-
-}
+/* ----------CAROUSEL---------- */
 
 .my-carou {
     height: 70vh;
@@ -146,12 +144,12 @@ body {
 
 .carousel-item img {
     height: 65vh;
-    width: auto !important;
-    margin: auto;
-    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain
 }
 
-.titre {
+/* .titre {
     position: absolute;
     z-index: 2;
     text-align: center;
@@ -164,7 +162,9 @@ body {
     padding: 2px 7px;
     z-index: 3;
     border-radius: 10px;
-}
+} */
+
+/* ----------MOVIES CARDS---------- */
 
 .carou2 {
     display: flex;
@@ -183,12 +183,20 @@ body {
     min-width: 250px;
     background-color: white;
     border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.my-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
 }
 
 .my-card>a {
     color: black;
     text-decoration: none;
 }
+
+/* ----------MOVIE DETAILS---------- */
 
 #movie-container {
     background-size: cover;
@@ -217,13 +225,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-#realese-genres,
-#note,
-#tagline,
-#description {
-    margin-bottom: 15px;
-}
-
 #directors {
     display: flex;
     justify-content: space-around;
@@ -233,10 +234,7 @@ body {
     background-color: #b8cbd0;
 }
 
-h2 {
-    color: white;
-    margin: 10px;
-}
+/* ----------ACTOR CARDS---------- */
 
 .actor-card {
     width: 150px;
@@ -247,12 +245,19 @@ h2 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.actor-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
 }
 
 .actor-img {
     width: auto;
-    height: 75%;
+    height: 52%;
     border-radius: 10px 10px 0px 0px;
+    object-fit: cover;
 }
 
 #actor-h5,
@@ -260,9 +265,27 @@ h2 {
     padding: 5px 5px 0px 5px;
 }
 
+/* ----------FOOTER---------- */
 
+.footer-content {
+    background-color: #344d59;
+    color: #b8cbd0;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
 
-/* Responsive */
+.footer-content p {
+    margin: 0;
+}
+
+.footer-content a {
+    color: #b8cbd0;
+}
+
+/* ----------RESPONSIVE---------- */
+
 @media (max-width: 768px) {
     .search-container {
         max-width: 250px;
@@ -281,4 +304,18 @@ h2 {
         width: 100%;
     }
 
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 375px) {
+    .navbar>.container-fluid {
+        flex-wrap: nowrap;
+    }
 }

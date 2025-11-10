@@ -1,6 +1,7 @@
 // Récupération de l'ID du film depuis les paramètres de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
+
 // Configuration des options pour la requête fetch
 const options = {
     method: "GET",
@@ -15,7 +16,8 @@ const options = {
 let movieContainer = document.getElementById("movie-container");
 let posterImg = document.getElementById("poster-img");
 let titleH1 = document.getElementById("title");
-let releaseGenresPara = document.getElementById("release-genres-duree");
+let releaseGenresPara = document.getElementById("release-genres");
+let runtimePara = document.getElementById("runtime");
 let notePara = document.getElementById("note");
 let taglinePara = document.getElementById("tagline");
 let descriptionPara = document.getElementById("description");
@@ -27,16 +29,39 @@ let actorCardsDiv = document.getElementById("actor-cards");
 fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=fr-FR`, options)
     .then((response) => response.json())
     .then((data) => {
-        let dateFormatee = transformerDate(data.release_date);
-        movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`;
+        // Extraire l'année de la date de sortie si disponible ou "N/A"
+        const year = data.release_date ? data.release_date.slice(0, 4) : "N/A";
+        // Formater la date de sortie si disponible ou "N/A"
+        const dateFormatee = data.release_date ? transformerDate(data.release_date) : "N/A";
+        // Utiliser un texte par défaut si le synopsis est vide
+        const synopsis = data.overview ? data.overview : "Synopsis non disponible.";
+        // Utiliser une image par défaut si poster_path est null
         const posterPath = data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : "./images/no-poster.png";
+        // Créer une chaîne avec tous les genres disponibles ou "N/A"
+        const genresString = data.genres ? data.genres.map((genre) => genre.name).join(", ") : "N/A";
+        // Convertir la durée en heures et minutes
+        const runtime = convertMinutesToHoursAndMinutes(data.runtime);
+
+        movieContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`;
         posterImg.setAttribute("src", posterPath);
-        titleH1.innerText = `${data.title} (${data.release_date.slice(0, 4)})`;
-        let genresString = data.genres.map((genre) => genre.name).join(", "); // Créer une chaîne avec tous les genres disponibles
+        titleH1.innerText = `${data.title} (${year})`;
         releaseGenresPara.innerText = `${dateFormatee}. ${genresString}`;
-        notePara.innerText = `⭐ ${data.vote_average.toFixed(1)} / 10`;
+        if (data.runtime) {
+            if (runtime.minutes == 0) {
+                runtimePara.innerText = `Durée : ${runtime.hours}h`;
+            } else {
+                runtimePara.innerText = `Durée : ${runtime.hours}h ${runtime.minutes}min`;
+            }
+        } else {
+            runtimePara.innerText = "Durée : N/A";
+        }
+        if (data.vote_average === 0) {
+            notePara.innerText = "⭐ N/A";
+        } else {
+            notePara.innerText = `⭐ ${data.vote_average.toFixed(1)} / 10`;
+        }
         taglinePara.innerText = data.tagline;
-        descriptionPara.innerText = data.overview;
+        descriptionPara.innerText = synopsis;
     })
     .catch((error) => console.error("Erreur:", error));
 
@@ -79,8 +104,25 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=fr-FR`, op
     })
     .catch((error) => console.error("Erreur:", error));
 
-// Fonction pour transformer la date de AAAA-MM-JJ en JJ-MM-AAAA
+// ------------------Mes Fonctions------------------
+
+/**
+ * Fonction pour transformer la date de AAAA-MM-JJ en JJ-MM-AAAA
+ * @param {string} dateString - date au format AAAA-MM-JJ
+ * @returns {string} - date au format JJ-MM-AAAA
+ */
 function transformerDate(dateString) {
     let [annee, mois, jour] = dateString.split("-");
     return `${jour}-${mois}-${annee}`;
+}
+
+/**
+ * Fonction pour convertir une durée en minutes en heures et minutes
+ * @param {number} totalMinutes - durée totale en minutes
+ * @returns {{hours: number, minutes: number}} - objet avec heures et minutes
+ */
+function convertMinutesToHoursAndMinutes(totalMinutes) {
+    const hours = Math.floor(totalMinutes / 60); // division entière
+    const minutes = totalMinutes % 60; // reste de la division
+    return { hours, minutes };
 }

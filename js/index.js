@@ -1,5 +1,6 @@
 "use strict";
 
+// Configuration des options pour la requête fetch
 const options = {
     method: "GET",
     headers: {
@@ -9,6 +10,7 @@ const options = {
     },
 };
 
+// Sélection des éléments du DOM
 let carouDiv = document.getElementById("createcarou");
 let filmCard = document.getElementById("filmCard");
 let searchInput = document.getElementById("searchbar");
@@ -37,7 +39,7 @@ fetch("https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1", op
                     <a href="movie.html?id=${film.id}"> <img src="https://image.tmdb.org/t/p/w500${film.backdrop_path}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${film.title}</h5>
-                        <p class="card-text">⭐${film.vote_average.toFixed(1)} / 10</p>
+                        <p class="card-text">⭐ ${film.vote_average.toFixed(1)} / 10</p>
                         <p class="card-text">${dateFormatee}</p>
                     </div>
                 </div>
@@ -48,9 +50,19 @@ fetch("https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1", op
         console.error("Erreur:", error);
     });
 
-// Fonctionnalité de recherche avec suggestions
+// Événement de saisie dans la barre de recherche
+searchInput.addEventListener("input", (e) => {
+    const query = e.target.value;
+    searchMovies(query);
+});
 
-// Fonction pour rechercher des films
+// ------------------Mes Fonctions------------------
+
+/**
+ * Fonction pour rechercher des films
+ * @param {string} query - terme de recherche
+ * @returns
+ */
 async function searchMovies(query) {
     if (query.length < 2) {
         hideSuggestions();
@@ -60,13 +72,18 @@ async function searchMovies(query) {
         const response = await fetch(`https://api.themoviedb.org/3/search/movie?language=fr-FR&query=${query}&page=1`, options);
         const data = await response.json();
         showSuggestions(data.results.slice(0, 8)); // Limiter à 8 suggestions
+        console.log(data.results.slice(0, 8));
     } catch (error) {
         console.error("Erreur lors de la recherche:", error);
         hideSuggestions();
     }
 }
 
-// Fonction pour afficher les suggestions
+/**
+ * Fonction pour afficher les suggestions
+ * @param {array} movies - liste des films suggérés
+ * @returns
+ */
 function showSuggestions(movies) {
     if (movies.length === 0) {
         hideSuggestions();
@@ -82,8 +99,8 @@ function showSuggestions(movies) {
         // Image par défaut si pas de poster
         const suggestionPosterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w92${movie.poster_path}` : "./images/no-poster.png";
 
-        // Année de sortie
-        const year = movie.release_date ? movie.release_date.split("-")[0] : "N/A";
+        // Année de sortie ou "N/A"
+        const year = movie.release_date ? movie.release_date.slice(0, 4) : "N/A";
 
         suggestionItem.innerHTML = `
             <img src="${suggestionPosterPath}" alt="${movie.title}" class="suggestion-poster">
@@ -92,43 +109,29 @@ function showSuggestions(movies) {
                 <div class="suggestion-year">${year}</div>
             </div>
         `;
+        suggestionsDiv.appendChild(suggestionItem);
 
         // Clic sur une suggestion
         suggestionItem.addEventListener("click", () => {
             window.location.href = `movie.html?id=${movie.id}`;
         });
-
-        suggestionsDiv.appendChild(suggestionItem);
     });
 
     suggestionsDiv.style.display = "block";
 }
 
-// Événement de saisie dans la barre de recherche
-searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.trim();
-    searchMovies(query);
-});
-
-// Recherche au clavier (Entrée)
-searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        const query = searchInput.value.trim();
-        if (query.length > 0) {
-            // Si il y a des suggestions visibles, prendre la première
-            const firstSuggestion = suggestionsDiv.querySelector(".suggestion-item");
-            if (firstSuggestion && suggestionsDiv.style.display !== "none") {
-                firstSuggestion.click();
-            }
-        }
-    }
-});
-
-// Fonction pour masquer les suggestions
+/**
+ * Fonction pour masquer les suggestions
+ */
 function hideSuggestions() {
     suggestionsDiv.style.display = "none";
 }
 
+/**
+ * Fonction pour transformer la date de AAAA-MM-JJ en JJ-MM-AAAA
+ * @param {string} dateString - date au format AAAA-MM-JJ
+ * @returns {string} - date au format JJ-MM-AAAA
+ */
 function transformerDate(dateString) {
     let [annee, mois, jour] = dateString.split("-");
     return `${jour}-${mois}-${annee}`;
